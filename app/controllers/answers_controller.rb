@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+  layout 'elearning'
+  before_action :authenticate_user!
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
 
   # GET /answers

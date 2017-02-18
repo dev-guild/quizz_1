@@ -1,4 +1,6 @@
 class ExercisesController < ApplicationController
+  layout 'elearning'
+  before_action :authenticate_user!
   before_action :set_exercise, only: [:show, :edit, :update, :destroy]
 
   # GET /exercises
@@ -15,6 +17,7 @@ class ExercisesController < ApplicationController
   # GET /exercises/new
   def new
     @exercise = Exercise.new
+    @exercise.questions.build
   end
 
   # GET /exercises/1/edit
