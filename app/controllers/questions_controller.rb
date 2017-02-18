@@ -1,10 +1,12 @@
 class QuestionsController < ApplicationController
+  layout 'elearning'
+  before_action :authenticate_user!
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = Question.all.shuffle
   end
 
   # GET /questions/1
