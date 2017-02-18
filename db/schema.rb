@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170218061649) do
+ActiveRecord::Schema.define(version: 20170218064029) do
+
+  create_table "answers", force: :cascade do |t|
+    t.string   "content"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "question_id"
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
 
   create_table "exercises", force: :cascade do |t|
     t.string   "name"
@@ -20,16 +28,22 @@ ActiveRecord::Schema.define(version: 20170218061649) do
 
   create_table "histories", force: :cascade do |t|
     t.float    "score"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.integer  "exercise_id"
+    t.index ["exercise_id"], name: "index_histories_on_exercise_id"
+    t.index ["user_id"], name: "index_histories_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
-    t.string   "question"
+    t.string   "content"
     t.string   "question_type"
     t.string   "correct_answer_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "exercise_id"
+    t.index ["exercise_id"], name: "index_questions_on_exercise_id"
   end
 
   create_table "users", force: :cascade do |t|
